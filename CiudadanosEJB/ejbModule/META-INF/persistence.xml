@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="CiudadanosEJB">
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <jta-data-source>java:jboss/datasources/ciudadanos2</jta-data-source>
+        <class>com.unipago.ciudadano.entity.Ciudad</class>
+        <class>com.unipago.ciudadano.entity.Ciudadano</class>
+        <class>com.unipago.ciudadano.entity.Correoelectronico</class>
+        <class>com.unipago.ciudadano.entity.Direccion</class>
+        <class>com.unipago.ciudadano.entity.Estado</class>
+        <class>com.unipago.ciudadano.entity.Pais</class>
+        <class>com.unipago.ciudadano.entity.Telefono</class>
+        <class>com.unipago.ciudadano.entity.Tipotlfn</class>  
+        <properties>
+        <property name="eclipselink.logging.level.sql" value="FINE"/>
+ <property name="eclipselink.logging.parameters" value="true"/>
+                <property name="eclipselink.target-server" value="JBoss"/>  
+ <property name="javax.persistence.schema-generation-target" value="database"/>
+<property name="eclipselink.deploy-on-startup" value="true"/>
+<property name="eclipselink.ddl-generation.output-mode" value="both"/>
+<property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+            <property name="eclipselink.logging.level" value="FINEST"/>  
+</properties>
+	
+	
+	
+	</persistence-unit>
+</persistence>

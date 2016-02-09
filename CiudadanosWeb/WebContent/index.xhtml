@@ -1,0 +1,236 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"  
+      >
+
+	<ui:composition template="/templates/template.xhtml">
+	
+		<ui:define name="title">UniPago Desarrollador Junior</ui:define>
+		
+		<ui:define name="content">
+			
+			<h:form>
+			   <p:commandButton value="Ver Ciudadanos" id="nonAjax" actionListener="#{ciudadano.listarCiudadano}" update="formRoles"  />
+			</h:form>
+			
+			  
+			  
+			  <h:panelGrid id="formRoles">
+			  
+			  <h:form  rendered="#{ciudadano.mostrarTable}"  >  
+			  	
+			  	<p:dataTable id="tableCiudadanos" var="c" value="#{ciudadano.listCiudadano}" editable="true" style="margin-bottom:20px">
+       <f:facet name="header">
+           Ciudadanos
+       </f:facet>
+ 
+       <p:ajax event="rowEdit" listener="#{ciudadano.onRowEdit}" update=":form:msgs" />
+       <p:ajax event="rowEditCancel" listener="#{ciudadano.onRowCancel}" update=":form:msgs" />
+ 		
+       <p:column headerText="Nombre">
+           <p:cellEditor>
+               <f:facet name="output"><h:outputText value="#{c.nombre}" /></f:facet>
+               <f:facet name="input"><p:inputText  value="#{c.nombre}" style="width:100%"/></f:facet>
+           </p:cellEditor>
+         
+        </p:column>
+        
+        <p:column headerText="Apellido">
+           <p:cellEditor>
+               <f:facet name="output"><h:outputText value="#{c.apellido}" /></f:facet>
+               <f:facet name="input"><p:inputText  value="#{c.apellido}" style="width:100%"/></f:facet>
+           </p:cellEditor>
+        </p:column>
+       		
+           
+           <p:column headerText="Sexo">
+           <p:cellEditor>
+               <f:facet name="output"><h:outputText value="#{c.sexo}" /></f:facet>
+               <f:facet name="input">
+				 <p:selectOneMenu id="sexo" value="#{c.sexo}">
+                                <f:selectItem itemLabel="Masculino" itemValue="1"/>
+                                <f:selectItem itemLabel="Femenino" itemValue="2"/>
+                   </p:selectOneMenu>
+				</f:facet>
+           </p:cellEditor>
+            </p:column>
+            
+             <p:column headerText="Fecha de Nacimiento">
+           
+           <p:cellEditor>
+               <f:facet name="output"><h:outputText value="#{c.fechaNacimiento}" pattern="dd-MMM-yyyy" locale="de" /></f:facet>
+               <f:facet name="input"><p:calendar id="german" value="#{c.fechaNacimiento}" locale="de" navigator="true" pattern="dd-MMM-yyyy" /></f:facet>
+           </p:cellEditor>
+            </p:column>
+            
+           <p:column headerText="Pais">
+           
+           <p:cellEditor>
+            <f:facet name="output"><h:outputText value="#{c.pais}"/></f:facet>
+            <f:facet name="input">
+                  <p:selectOneMenu id="pais" value="#{c.pais}">
+                                <f:selectItem itemLabel="Venezuela" itemValue="1"/>
+                                <f:selectItem itemLabel="Republica Dominicana" itemValue="2"/>
+                   </p:selectOneMenu>
+         </f:facet>
+              
+			</p:cellEditor>
+            </p:column>
+            
+             <p:column headerText="Estado">
+           
+           <p:cellEditor>
+            <f:facet name="output"><h:outputText value="#{c.estado}"/></f:facet>
+            <f:facet name="input">
+                  <p:selectOneMenu id="estado" value="#{c.estado}">
+                                <f:selectItem itemLabel="Distrito Capital" itemValue="1"/>
+                  				<f:selectItem itemLabel="Santo Domingo" itemValue="2"/>
+                   </p:selectOneMenu>
+         </f:facet>
+              </p:cellEditor>
+              </p:column>
+              <p:column headerText="Ciudad">
+           
+           <p:cellEditor>
+            <f:facet name="output"><h:outputText value="#{c.ciudad}"/></f:facet>
+            <f:facet name="input">
+                  <p:selectOneMenu id="ciudad" value="#{c.ciudad}">
+                                <f:selectItem itemLabel="Caracas" itemValue="1"/>
+                                <f:selectItem itemLabel="Santo Domingo" itemValue="2"/>
+                   </p:selectOneMenu>
+         </f:facet>
+			</p:cellEditor>
+            </p:column>
+            
+            <p:column headerText="Calle">
+           <p:cellEditor>
+               <f:facet name="output"><h:outputText value="#{c.calle}" /></f:facet>
+               <f:facet name="input"><p:inputText  value="#{c.calle}" style="width:100%"/></f:facet>
+           </p:cellEditor>
+        </p:column>
+        
+        <p:column headerText="Telefono">
+           <p:cellEditor>
+               <f:facet name="output"><h:outputText value="#{c.telefonos}" /></f:facet>
+               <f:facet name="input"><p:inputText  value="#{c.telefonos}" style="width:100%"/></f:facet>
+           </p:cellEditor>
+        </p:column>
+	
+		<p:column style="width:32px">
+             <p:cellEditor>
+               <f:facet name="output"><p:commandButton id="guardarNuevoItem"   
+               	styleClass="ui-icon ui-icon-trash" style=" background-color: #F5F4F0; border: 0px;" /></f:facet>
+               <f:facet name="input"><h:outputText value="" /></f:facet>
+           </p:cellEditor>      
+       </p:column>                  
+            
+            
+            
+           
+      
+       <p:column style="width:32px">
+           <p:rowEditor />
+       </p:column>
+   </p:dataTable>
+   
+			  </h:form>
+			  
+			  </h:panelGrid>
+			  
+			  <p:spacer height="30"></p:spacer>
+			  <h:panelGrid style="margin: 0 auto;" id="crearCiudadano">
+			  	<p:outputLabel value="Crear Ciudadano"/> 
+			  	<h:form>
+			  	<h:outputLabel value="Datos Personales"/>
+			  	<p:panelGrid columns="4">
+
+                           
+                         
+
+                            <h:outputLabel value="nombre:"/>
+                            <p:inputText value="#{ciudadano.ciudadano.nombre}" required="true"/>
+
+                            <h:outputLabel value="Apellido"/>
+                            <p:inputText value="#{ciudadano.ciudadano.apellido}"/>
+
+                            <h:outputLabel value="Sexo"/>
+                            <p:selectOneMenu id="sexo" value="#{ciudadano.ciudadano.sexo}">
+                                <f:selectItem itemLabel="Masculino" itemValue="Masculino"/>
+                                <f:selectItem itemLabel="Femenino" itemValue="Femenino"/>
+                   			</p:selectOneMenu>
+									
+							<h:outputLabel value="Fecha de Nacimiento"/>
+							<p:calendar id="dds" value="#{ciudadano.ciudadano.fechaNacimiento}" locale="de" navigator="true" pattern="dd-MMM-yyyy" />
+							
+                        </p:panelGrid>
+
+						                                <p:outputLabel value="Direccion"/>
+						
+                        <p:panelGrid columns="4">
+                            
+                            
+
+                            <h:outputLabel value="Pais"/>
+                            <p:selectOneMenu id="pais2" value="#{ciudadano.pais.idPais}">
+                                <f:selectItem itemValue="1" itemLabel="Venezuela"/>
+                                <f:selectItem itemValue="2" itemLabel="Republica Dominicana"/>
+                  			 </p:selectOneMenu>
+
+                            <h:outputLabel value="Estado"/>
+                             <p:selectOneMenu id="estado2" value="#{ciudadano.estado.idEstado}">
+                                <f:selectItem itemLabel="Distrito Capital" itemValue="1"/>
+                  				<f:selectItem itemLabel="Santo Domingo" itemValue="2"/>
+                   			</p:selectOneMenu>
+
+                            <h:outputLabel value="Ciudad"/>
+						                  <p:selectOneMenu id="ciudad2" value="#{ciudadano.ciudad.idCiudad}">
+						                                <f:selectItem itemValue="1" itemLabel="Caracas"/>
+						                                <f:selectItem itemValue="3" itemLabel="Santo Domingo"/>
+						                   </p:selectOneMenu>
+						              
+						        
+                            <h:outputLabel value="calle"/>
+                            <h:inputText value="#{ciudadano.direccion.calle}" />
+                        </p:panelGrid>
+                        
+                                                        <p:outputLabel value="Datos de contacto" /> 
+                        
+                        <p:panelGrid columns="4">
+
+							
+                            <h:outputLabel value="Telefono"/>
+                            <p:inputText value="#{ciudadano.telefonoLocal.numero}"/>
+							
+							
+							
+                            <h:outputLabel value="Correo Electronico"/>
+                            <p:inputText value="#{ciudadano.correoelectronico.direccion}"/>
+
+                        
+
+                        </p:panelGrid>
+                        <p:spacer height="30"/>
+			  		<p:commandButton value="Crear" actionListener="#{ciudadano.crearCiudadano}"></p:commandButton>
+			  		</h:form>
+			  </h:panelGrid>
+			                      
+                 
+                
+                
+                
+                <h:form id="form">
+   <p:growl id="msgs" showDetail="true"/>
+ 
+   
+</h:form>
+			
+		</ui:define>	
+		
+		<ui:define name="scripts">
+			        <h:outputScript library="js" name="js/ciudadano.js"></h:outputScript>	
+		</ui:define>	
+	</ui:composition>
+</html>
