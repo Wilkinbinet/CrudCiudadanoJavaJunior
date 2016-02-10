@@ -1,0 +1,270 @@
+<?xml version="1.0" ?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://ws.ciudadano.unipago.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="CiudadanosWS" targetNamespace="http://ws.ciudadano.unipago.com/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://ws.ciudadano.unipago.com/" elementFormDefault="unqualified" targetNamespace="http://ws.ciudadano.unipago.com/" version="1.0">
+
+  <xs:element name="crear" type="tns:crear"></xs:element>
+
+  <xs:element name="crearResponse" type="tns:crearResponse"></xs:element>
+
+  <xs:element name="editar" type="tns:editar"></xs:element>
+
+  <xs:element name="editarResponse" type="tns:editarResponse"></xs:element>
+
+  <xs:element name="eliminar" type="tns:eliminar"></xs:element>
+
+  <xs:element name="obtenerCiudadano" type="tns:obtenerCiudadano"></xs:element>
+
+  <xs:element name="obtenerCiudadanoResponse" type="tns:obtenerCiudadanoResponse"></xs:element>
+
+  <xs:element name="obtenerCiudadanosAll" type="tns:obtenerCiudadanosAll"></xs:element>
+
+  <xs:element name="obtenerCiudadanosAllResponse" type="tns:obtenerCiudadanosAllResponse"></xs:element>
+
+  <xs:complexType name="crear">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ciudadano" type="tns:ciudadano"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ciudadano">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="apellido" type="xs:string"></xs:element>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="correoelectronicos" nillable="true" type="tns:correoelectronico"></xs:element>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="direccions" nillable="true" type="tns:direccion"></xs:element>
+      <xs:element minOccurs="0" name="fechaNacimiento" type="xs:dateTime"></xs:element>
+      <xs:element name="idCiudadano" type="xs:int"></xs:element>
+      <xs:element minOccurs="0" name="nombre" type="xs:string"></xs:element>
+      <xs:element minOccurs="0" name="sexo" type="xs:string"></xs:element>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="telefonos" nillable="true" type="tns:telefono"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="correoelectronico">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ciudadano" type="tns:ciudadano"></xs:element>
+      <xs:element minOccurs="0" name="direccion" type="xs:string"></xs:element>
+      <xs:element name="idCorreo" type="xs:int"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="direccion">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="calle" type="xs:string"></xs:element>
+      <xs:element minOccurs="0" name="ciudad" type="tns:ciudad"></xs:element>
+      <xs:element minOccurs="0" name="ciudadano" type="tns:ciudadano"></xs:element>
+      <xs:element minOccurs="0" name="estado" type="tns:estado"></xs:element>
+      <xs:element name="idDireccion" type="xs:int"></xs:element>
+      <xs:element minOccurs="0" name="pais" type="tns:pais"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ciudad">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="direccions" nillable="true" type="tns:direccion"></xs:element>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="estados" nillable="true" type="tns:estado"></xs:element>
+      <xs:element name="idCiudad" type="xs:int"></xs:element>
+      <xs:element minOccurs="0" name="nombre" type="xs:string"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="estado">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ciudad" type="tns:ciudad"></xs:element>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="direccions" nillable="true" type="tns:direccion"></xs:element>
+      <xs:element name="idEstado" type="xs:int"></xs:element>
+      <xs:element minOccurs="0" name="nombre" type="xs:string"></xs:element>
+      <xs:element minOccurs="0" name="pais" type="tns:pais"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="pais">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="direccions" nillable="true" type="tns:direccion"></xs:element>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="estados" nillable="true" type="tns:estado"></xs:element>
+      <xs:element name="idPais" type="xs:int"></xs:element>
+      <xs:element minOccurs="0" name="nombre" type="xs:string"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="telefono">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ciudadano" type="tns:ciudadano"></xs:element>
+      <xs:element name="id" type="xs:int"></xs:element>
+      <xs:element name="numero" type="xs:int"></xs:element>
+      <xs:element minOccurs="0" name="tipotlfn" type="tns:tipotlfn"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="tipotlfn">
+    <xs:sequence>
+      <xs:element name="idTipoTlfn" type="xs:int"></xs:element>
+      <xs:element minOccurs="0" name="nombreTipo" type="xs:string"></xs:element>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="telefonos" nillable="true" type="tns:telefono"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="crearResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:ciudadano"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="editar">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ciudadano" type="tns:ciudadano"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="editarResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:ciudadano"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="eliminar">
+    <xs:sequence>
+      <xs:element name="id" type="xs:int"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="obtenerCiudadanosAll">
+    <xs:sequence></xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="obtenerCiudadanosAllResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:ciudadano"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="obtenerCiudadano">
+    <xs:sequence>
+      <xs:element name="id" type="xs:int"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="obtenerCiudadanoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:ciudadano"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="editar">
+    <wsdl:part element="tns:editar" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="editarResponse">
+    <wsdl:part element="tns:editarResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="eliminar">
+    <wsdl:part element="tns:eliminar" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="obtenerCiudadanosAllResponse">
+    <wsdl:part element="tns:obtenerCiudadanosAllResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="obtenerCiudadanoResponse">
+    <wsdl:part element="tns:obtenerCiudadanoResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="crear">
+    <wsdl:part element="tns:crear" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="obtenerCiudadanosAll">
+    <wsdl:part element="tns:obtenerCiudadanosAll" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="crearResponse">
+    <wsdl:part element="tns:crearResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="obtenerCiudadano">
+    <wsdl:part element="tns:obtenerCiudadano" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="CiudadanosWS">
+    <wsdl:operation name="crear">
+      <wsdl:input message="tns:crear" name="crear">
+    </wsdl:input>
+      <wsdl:output message="tns:crearResponse" name="crearResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="editar">
+      <wsdl:input message="tns:editar" name="editar">
+    </wsdl:input>
+      <wsdl:output message="tns:editarResponse" name="editarResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="eliminar">
+      <wsdl:input message="tns:eliminar" name="eliminar">
+    </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerCiudadanosAll">
+      <wsdl:input message="tns:obtenerCiudadanosAll" name="obtenerCiudadanosAll">
+    </wsdl:input>
+      <wsdl:output message="tns:obtenerCiudadanosAllResponse" name="obtenerCiudadanosAllResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerCiudadano">
+      <wsdl:input message="tns:obtenerCiudadano" name="obtenerCiudadano">
+    </wsdl:input>
+      <wsdl:output message="tns:obtenerCiudadanoResponse" name="obtenerCiudadanoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CiudadanosWSSoapBinding" type="tns:CiudadanosWS">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"></soap:binding>
+    <wsdl:operation name="crear">
+      <soap:operation soapAction="" style="document"></soap:operation>
+      <wsdl:input name="crear">
+        <soap:body use="literal"></soap:body>
+      </wsdl:input>
+      <wsdl:output name="crearResponse">
+        <soap:body use="literal"></soap:body>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="editar">
+      <soap:operation soapAction="" style="document"></soap:operation>
+      <wsdl:input name="editar">
+        <soap:body use="literal"></soap:body>
+      </wsdl:input>
+      <wsdl:output name="editarResponse">
+        <soap:body use="literal"></soap:body>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="eliminar">
+      <soap:operation soapAction="" style="document"></soap:operation>
+      <wsdl:input name="eliminar">
+        <soap:body use="literal"></soap:body>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerCiudadanosAll">
+      <soap:operation soapAction="" style="document"></soap:operation>
+      <wsdl:input name="obtenerCiudadanosAll">
+        <soap:body use="literal"></soap:body>
+      </wsdl:input>
+      <wsdl:output name="obtenerCiudadanosAllResponse">
+        <soap:body use="literal"></soap:body>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="obtenerCiudadano">
+      <soap:operation soapAction="" style="document"></soap:operation>
+      <wsdl:input name="obtenerCiudadano">
+        <soap:body use="literal"></soap:body>
+      </wsdl:input>
+      <wsdl:output name="obtenerCiudadanoResponse">
+        <soap:body use="literal"></soap:body>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CiudadanosWS">
+    <wsdl:port binding="tns:CiudadanosWSSoapBinding" name="CiudadanosWSPort">
+      <soap:address location="http://localhost:8080/CiudadanosEJB/CiudadanosWS/CiudadanosWS"></soap:address>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
